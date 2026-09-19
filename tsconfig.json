@@ -16,5 +16,6 @@
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
     "skipLibCheck": true
-  }
+  },
+  "exclude": ["dist", "fixtures", "node_modules"]
 }

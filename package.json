@@ -1,22 +1,21 @@
 {
-  "name": "oxlint-plugin-template",
+  "name": "oxlint-plugin-llm",
   "version": "0.0.0",
-  "private": true,
-  "description": "Template for an Oxlint plugin.",
+  "description": "Lint rules for code that calls LLM SDKs.",
   "keywords": [
     "lint",
     "oxlint",
     "oxlint-plugin"
   ],
-  "homepage": "https://github.com/tunderadev/oxlint-plugin-template#readme",
+  "homepage": "https://github.com/tunderadev/oxlint-plugin-llm#readme",
   "bugs": {
-    "url": "https://github.com/tunderadev/oxlint-plugin-template/issues"
+    "url": "https://github.com/tunderadev/oxlint-plugin-llm/issues"
   },
   "license": "MIT",
   "author": "tunderadev",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tunderadev/oxlint-plugin-template.git"
+    "url": "git+https://github.com/tunderadev/oxlint-plugin-llm.git"
   },
   "files": [
     "dist"
@@ -38,7 +37,6 @@
     "fix": "vp check --fix",
     "dogfood": "node scripts/dogfood.ts",
     "new-rule": "node scripts/new-rule.ts",
-    "init-template": "node scripts/init-template.ts",
     "release": "bumpp",
     "prepublishOnly": "vp run build"
   },

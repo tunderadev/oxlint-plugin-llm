@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="oxlint-plugin-template">
-  <rect x="4" y="4" width="120" height="120" rx="24" fill="#111827"/>
-  <!-- the comment: two slashes, the second one resolves into a check -->
-  <path d="M38 92 L54 36" stroke="#9ca3af" stroke-width="10" stroke-linecap="round" fill="none"/>
-  <path d="M62 78 L74 92 L100 36" stroke="#9ca3af" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="oxlint-plugin-llm">
+  <rect x="4" y="4" width="120" height="120" rx="24" fill="#16121f"/>
+  <!-- braces around a four-point spark: SDK calls, linted -->
+  <path d="M40 30 C30 30 30 36 30 44 L30 56 C30 62 26 64 22 64 C26 64 30 66 30 72 L30 84 C30 92 30 98 40 98" stroke="#a78bfa" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M88 30 C98 30 98 36 98 44 L98 56 C98 62 102 64 106 64 C102 64 98 66 98 72 L98 84 C98 92 98 98 88 98" stroke="#a78bfa" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M64 42 C66 56 72 62 86 64 C72 66 66 72 64 86 C62 72 56 66 42 64 C56 62 62 56 64 42 Z" fill="#a78bfa"/>
 </svg>

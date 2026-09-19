@@ -125,8 +125,9 @@ const nextIndex = index
     `[\`\${name}/${ruleName}\`]: "error",\n      // new-rule:recommended:end`,
   )
   .replace(
-    /(import \w+ from "\.\/rules\/[^"]+";\n)(?![\s\S]*import \w+ from "\.\/rules\/)/,
-    `$1import ${importName} from "./rules/${ruleName}.ts";\n`,
+    // After the last rule import, or after the @oxlint/plugins import when there is none yet.
+    /(import \w+ from "\.\/rules\/[^"]+";\n)(?![\s\S]*import \w+ from "\.\/rules\/)|(import [^\n]* from "@oxlint\/plugins";\n)(?![\s\S]*import \w+ from "\.\/rules\/)/,
+    `$1$2import ${importName} from "./rules/${ruleName}.ts";\n`,
   );
 writeFileSync(indexPath, nextIndex);
 
