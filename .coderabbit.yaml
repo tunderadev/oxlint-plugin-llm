@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+# CodeRabbit reviews every PR once its GitHub App is installed. It is free on
+# public repos. With request_changes_workflow it also approves the PR after its
+# own comments are resolved, so the maintainer sees a green review instead of
+# reading the diff cold. Renovate PRs are skipped: CI is the review there.
+reviews:
+  request_changes_workflow: true
+  review_status: false
+  auto_review:
+    enabled: true
+    drafts: false
+    ignore_title_keywords:
+      - "chore(deps)"
+  path_filters:
+    - "!pnpm-lock.yaml"
+    - "!dist/**"
+  path_instructions:
+    - path: "src/rules/**/*.ts"
+      instructions: >-
+        Rules use defineRule with createOnce from @oxlint/plugins. before() must
+        return false when the file cannot match, since JS plugins have no cache.
+        Files lint in parallel, so state lives inside createOnce and resets in
+        before(). Every rule change needs a valid and an invalid test case, and
+        a change to what a rule reports needs its docs/rules page updated.
+chat:
+  auto_reply: true

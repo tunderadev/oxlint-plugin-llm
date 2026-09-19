@@ -37,7 +37,13 @@ docs: fix typo in README
 
 Only `feat` and `fix` show up in release notes. A CI check enforces the format.
 
+A ruleset on `main` requires green CI before anything merges. Bots review every PR too: CodeRabbit and Macroscope leave comments and approve when they find nothing. Their approval is advice for the maintainer, not a merge gate. A human still merges PRs from people.
+
 Open an issue before a large change so we can agree on the shape first. Small fixes can go straight to a PR.
+
+## Dependencies
+
+Renovate opens dependency PRs and merges them itself once CI passes. Only majors of runtime dependencies wait for a human, since those change what users install. The Dependency Dashboard issue lists anything it is holding back.
 
 If an AI tool wrote part of your change, say so in the PR. That is fine. What is not fine is a PR you cannot explain line by line, or an issue or PR description written for you.
 

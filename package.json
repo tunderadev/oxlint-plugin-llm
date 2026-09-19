@@ -37,6 +37,7 @@
     "fix": "vp check --fix",
     "dogfood": "node scripts/dogfood.ts",
     "new-rule": "node scripts/new-rule.ts",
+    "setup-repo": "node scripts/setup-repo.ts",
     "release": "bumpp",
     "prepublishOnly": "vp run build"
   },
