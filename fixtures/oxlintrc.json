@@ -1,7 +1,14 @@
 {
   "plugins": [],
   "jsPlugins": ["../dist/index.mjs"],
+  "settings": {
+    "llm": { "ai": 7, "openai": 7, "anthropic": 0, "mcp": 2 }
+  },
   "rules": {
-    "template/no-fixme": "error"
+    "llm/anthropic-require-max-tokens": "error",
+    "llm/no-deprecated-api": "warn",
+    "llm/no-unconsumed-stream": "error",
+    "llm/no-stream-result-as-response": "error",
+    "llm/require-abort-signal-in-handlers": "error"
   }
 }
