@@ -1,0 +1,45 @@
+name: New rule
+description: Propose a rule this plugin should have.
+labels: [new rule]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Rule name
+      placeholder: no-foo
+    validations:
+      required: true
+  - type: textarea
+    id: bad
+    attributes:
+      label: Code it should flag
+      render: ts
+    validations:
+      required: true
+  - type: textarea
+    id: good
+    attributes:
+      label: Code it should leave alone
+      render: ts
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it matters
+      description: What goes wrong when the bad version ships.
+    validations:
+      required: true
+  - type: dropdown
+    id: fix
+    attributes:
+      label: Can it be autofixed safely
+      options:
+        - "Yes"
+        - "No"
+        - Not sure
+  - type: input
+    id: upstream
+    attributes:
+      label: Upstream rule, if porting one
+      placeholder: eslint-plugin-foo/no-foo

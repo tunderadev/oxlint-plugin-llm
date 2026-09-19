@@ -1,0 +1,48 @@
+name: Bug report
+description: A rule crashed, flagged good code, or missed bad code.
+labels: [bug]
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What happened
+      options:
+        - Crash or error from the plugin
+        - False positive (flagged code that is fine)
+        - False negative (missed code it should flag)
+        - Something else
+    validations:
+      required: true
+  - type: input
+    id: rule
+    attributes:
+      label: Rule
+      placeholder: no-fixme
+  - type: textarea
+    id: code
+    attributes:
+      label: Smallest code that shows it
+      description: Paste code, not a description of code. Ten lines is usually enough.
+      render: ts
+    validations:
+      required: true
+  - type: textarea
+    id: config
+    attributes:
+      label: Your oxlint config
+      description: The jsPlugins and rules entries that matter.
+      render: json
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected instead
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Output of `pnpm list oxlint` plus this plugin's version.
+      placeholder: oxlint 1.83.0, plugin 0.2.0, node 24.20.0
+    validations:
+      required: true

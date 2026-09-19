@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="oxlint-plugin-template">
+  <rect x="4" y="4" width="120" height="120" rx="24" fill="#111827"/>
+  <!-- the comment: two slashes, the second one resolves into a check -->
+  <path d="M38 92 L54 36" stroke="#9ca3af" stroke-width="10" stroke-linecap="round" fill="none"/>
+  <path d="M62 78 L74 92 L100 36" stroke="#9ca3af" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

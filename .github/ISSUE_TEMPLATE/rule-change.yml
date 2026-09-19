@@ -1,0 +1,24 @@
+name: Rule change
+description: An option or behaviour change for an existing rule.
+labels: [enhancement]
+body:
+  - type: input
+    id: rule
+    attributes:
+      label: Rule
+      placeholder: no-fixme
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: What it does now
+    validations:
+      required: true
+  - type: textarea
+    id: proposed
+    attributes:
+      label: What you want it to do
+      description: If it is an option, show the config you would write.
+    validations:
+      required: true

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", "security:minimumReleaseAgeNpm"],
+  "packageRules": [
+    {
+      "matchPackageNames": ["oxlint", "@oxlint/plugins", "vite-plus"],
+      "groupName": "oxlint and vite-plus"
+    }
+  ]
+}
