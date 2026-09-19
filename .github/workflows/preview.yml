@@ -3,6 +3,8 @@ name: Preview
 # Publishes every PR build to pkg.pr.new so reviewers can install it:
 #   pnpm add https://pkg.pr.new/<owner>/<repo>@<pr-number>
 # Needs the pkg.pr.new GitHub App installed on the repo, or it fails on every PR.
+# --pnpm packs with pnpm: npm pack refuses to run because devEngines pins pnpm, and
+# it cannot resolve catalog: versions either.
 
 on:
   pull_request:
@@ -22,4 +24,4 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
-      - run: pnpm dlx pkg-pr-new@0.0.88 publish
+      - run: pnpm dlx pkg-pr-new@0.0.88 publish --pnpm
