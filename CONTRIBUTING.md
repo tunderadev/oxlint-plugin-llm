@@ -4,7 +4,7 @@ Thanks for looking. This file is short on purpose.
 
 ## Setup
 
-Node 24 and pnpm. If you have [Vite+](https://viteplus.dev) installed, `vp install` also pins both for you.
+Node 22 or newer and pnpm. If you have [Vite+](https://viteplus.dev) installed, `vp install` also pins both for you.
 
 ```sh
 pnpm install

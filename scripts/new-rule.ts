@@ -118,16 +118,19 @@ No.
 `,
 );
 
-const nextIndex = index
+const importLine = `import ${importName} from "./rules/${ruleName}.ts";\n`;
+// After the last existing rule import, or after the @oxlint/plugins import when this is the first rule.
+const withImport = /import \w+ from "\.\/rules\//.test(index)
+  ? index.replace(
+      /(import \w+ from "\.\/rules\/[^"]+";\n)(?![\s\S]*import \w+ from "\.\/rules\/)/,
+      `$1${importLine}`,
+    )
+  : index.replace(/(import \{[^}]*\} from "@oxlint\/plugins";\n)/, `$1${importLine}`);
+const nextIndex = withImport
   .replace("// new-rule:end", `"${ruleName}": ${importName},\n  // new-rule:end`)
   .replace(
     "// new-rule:recommended:end",
     `[\`\${name}/${ruleName}\`]: "error",\n      // new-rule:recommended:end`,
-  )
-  .replace(
-    // After the last rule import, or after the @oxlint/plugins import when there is none yet.
-    /(import \w+ from "\.\/rules\/[^"]+";\n)(?![\s\S]*import \w+ from "\.\/rules\/)|(import [^\n]* from "@oxlint\/plugins";\n)(?![\s\S]*import \w+ from "\.\/rules\/)/,
-    `$1$2import ${importName} from "./rules/${ruleName}.ts";\n`,
   );
 writeFileSync(indexPath, nextIndex);
 

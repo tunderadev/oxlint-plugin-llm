@@ -1,4 +1,4 @@
-<img src="assets/logo.svg" width="96" align="right" alt="">
+<img src="https://raw.githubusercontent.com/tunderadev/oxlint-plugin-llm/main/assets/logo.svg" width="96" align="right" alt="">
 
 # oxlint-plugin-llm
 
