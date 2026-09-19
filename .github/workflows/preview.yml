@@ -3,6 +3,8 @@ name: Preview
 # Publishes every PR build to pkg.pr.new so reviewers can install it:
 #   pnpm add https://pkg.pr.new/<owner>/<repo>@<pr-number>
 # Needs the pkg.pr.new GitHub App installed on the repo, or it fails on every PR.
+# A private package has nothing to preview, so the step skips itself there. That is
+# how the template repo stays green without the app.
 # --pnpm packs with pnpm: npm pack refuses to run because devEngines pins pnpm, and
 # it cannot resolve catalog: versions either.
 
@@ -24,4 +26,10 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
-      - run: pnpm dlx pkg-pr-new@0.0.88 publish --pnpm
+      - name: Publish the PR build, unless the package is private
+        run: |
+          if [ "$(node -p "require('./package.json').private === true")" = true ]; then
+            echo "package.json says private, so there is nothing to preview"
+          else
+            pnpm dlx pkg-pr-new@0.0.88 publish --pnpm
+          fi
