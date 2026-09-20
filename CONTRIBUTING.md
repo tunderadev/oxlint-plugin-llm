@@ -49,4 +49,6 @@ If an AI tool wrote part of your change, say so in the PR. That is fine. What is
 
 ## Releases
 
+Releases are manual and have no schedule. One is due when main has something a user would notice since the last tag: a `feat` or `fix` commit, or a change to a runtime dependency. A weekly workflow checks for that and opens a "release pending" issue when it finds something. Dev dependency bumps, docs, and CI changes never need a release on their own.
+
 Maintainers run `pnpm release`. That bumps the version, tags, and pushes. The tag triggers `publish.yml`, which publishes to npm through trusted publishing and writes the GitHub release from the commit titles since the last tag.

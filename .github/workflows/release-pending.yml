@@ -1,0 +1,46 @@
+name: Release pending
+
+# Once a week, compares main to the last tag. When main has a feat or fix commit, or a
+# change to a runtime dependency, it opens or refreshes a "release pending" issue.
+# When a release has covered everything, it closes that issue. Releases themselves stay
+# manual: pnpm release.
+
+on:
+  schedule:
+    - cron: "0 9 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+      - run: node scripts/release-pending.ts > pending.md
+      - name: Open, refresh, or close the issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create "release pending" --color 0e8a16 --description "main has changes users would notice" --force
+          number="$(gh issue list --label "release pending" --state open --json number --jq '.[0].number')"
+          if [ -s pending.md ]; then
+            if [ -n "$number" ]; then
+              gh issue edit "$number" --body-file pending.md
+              echo "refreshed #$number"
+            else
+              gh issue create --title "Release pending" --label "release pending" --body-file pending.md
+            fi
+          elif [ -n "$number" ]; then
+            gh issue close "$number" --comment "A release now covers everything that was listed here."
+            echo "closed #$number"
+          else
+            echo "nothing pending"
+          fi
