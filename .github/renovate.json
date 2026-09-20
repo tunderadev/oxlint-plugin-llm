@@ -19,8 +19,8 @@
       "groupName": "oxlint and vite-plus"
     },
     {
+      "description": "Runtime dependencies change what users install, so a human merges them and cuts a release.",
       "matchDepTypes": ["dependencies", "peerDependencies"],
-      "matchUpdateTypes": ["major"],
       "automerge": false
     }
   ]
