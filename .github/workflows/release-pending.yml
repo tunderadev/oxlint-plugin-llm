@@ -1,25 +1,40 @@
 name: Release pending
 
-# Once a week, compares main to the last tag. When main has a feat or fix commit, or a
-# change to a runtime dependency, it opens or refreshes a "release pending" issue.
-# When a release has covered everything, it closes that issue. Releases themselves stay
-# manual: pnpm release.
+# Compares main to the last tag. When main has a feat or fix commit, a breaking change, or a
+# change to a runtime dependency, it opens or refreshes a "release pending" issue that says
+# which bump to make. When a release has covered everything, it closes that issue. Runs on
+# every push to main, every Monday, by hand, and when someone ticks the box in the issue.
+# Releases themselves stay manual: pnpm release.
 
 on:
+  push:
+    branches: [main]
   schedule:
     - cron: "0 9 * * 1"
   workflow_dispatch:
+  issues:
+    types: [edited]
 
 permissions:
   contents: read
   issues: write
 
+concurrency:
+  group: release-pending
+  cancel-in-progress: false
+
 jobs:
   check:
+    # An issue edit only counts when it is the release pending issue and the box was ticked.
+    if: >-
+      github.event_name != 'issues' ||
+      (contains(github.event.issue.labels.*.name, 'release pending') &&
+       contains(github.event.issue.body, '- [x] <!-- rerun -->'))
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          ref: main
           fetch-depth: 0
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
@@ -33,8 +48,12 @@ jobs:
           number="$(gh issue list --label "release pending" --state open --json number --jq '.[0].number')"
           if [ -s pending.md ]; then
             if [ -n "$number" ]; then
-              gh issue edit "$number" --body-file pending.md
-              echo "refreshed #$number"
+              if [ "$(gh issue view "$number" --json body --jq .body)" = "$(cat pending.md)" ]; then
+                echo "unchanged #$number"
+              else
+                gh issue edit "$number" --body-file pending.md
+                echo "refreshed #$number"
+              fi
             else
               gh issue create --title "Release pending" --label "release pending" --body-file pending.md
             fi
